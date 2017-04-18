@@ -1,5 +1,5 @@
 <?php
-namespace HungNguyenThanh\Saml;
+namespace Sotatek\Saml;
 use OneLogin_Saml2_Auth;
 
 class SamlUser

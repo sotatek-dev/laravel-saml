@@ -1,6 +1,6 @@
 <?php
-namespace HungNguyenThanh\Saml\Controllers;
-use HungNguyenThanh\Saml\Events\SamlLoginEvent;
+namespace Sotatek\Saml\Controllers;
+use Sotatek\Saml\Events\SamlLoginEvent;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -9,7 +9,7 @@ class SamlController extends Controller
 {
     protected $samlAuth;
 
-    function __construct(\HungNguyenThanh\Saml\SamlAuth $samlAuth)
+    function __construct(\Sotatek\Saml\SamlAuth $samlAuth)
     {
         $this->samlAuth = $samlAuth;
     }

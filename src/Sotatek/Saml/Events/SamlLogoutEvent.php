@@ -1,5 +1,5 @@
 <?php
-namespace HungNguyenThanh\Saml\Events;
+namespace Sotatek\Saml\Events;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 

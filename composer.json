@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-0": {
-      "HungNguyenThanh\\Saml\\": "src/"
+      "Sotatek\\Saml\\": "src/"
     }
   },
   "minimum-stability": "stable"

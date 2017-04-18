@@ -1,6 +1,6 @@
 <?php
-namespace HungNguyenThanh\Saml\Events;
-use HungNguyenThanh\Saml\SamlUser;
+namespace Sotatek\Saml\Events;
+use Sotatek\Saml\SamlUser;
 
 class SamlLoginEvent{
     protected $user;

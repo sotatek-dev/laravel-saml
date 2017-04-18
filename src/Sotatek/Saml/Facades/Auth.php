@@ -1,10 +1,10 @@
 <?php
-namespace HungNguyenThanh\Saml\Facades;
+namespace Sotatek\Saml\Facades;
 use Illuminate\Support\Facades\Facade;
 class Auth extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'HungNguyenThanh\Saml\SamlAuth';
+        return 'Sotatek\Saml\SamlAuth';
     }
 } 

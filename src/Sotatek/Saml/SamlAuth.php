@@ -1,9 +1,9 @@
 <?php
-namespace HungNguyenThanh\Saml;
+namespace Sotatek\Saml;
 use OneLogin_Saml2_Auth;
 use OneLogin_Saml2_Error;
 use OneLogin_Saml2_Utils;
-use HungNguyenThanh\Saml\Events\SamlLogoutEvent;
+use Sotatek\Saml\Events\SamlLogoutEvent;
 use Log;
 use Psr\Log\InvalidArgumentException;
 class SamlAuth

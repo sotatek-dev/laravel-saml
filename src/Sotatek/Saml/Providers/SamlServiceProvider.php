@@ -1,5 +1,5 @@
 <?php
-namespace HungNguyenThanh\Saml\Providers;
+namespace Sotatek\Saml\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use OneLogin_Saml2_Auth;
@@ -32,7 +32,7 @@ class SamlServiceProvider extends ServiceProvider
         if(config('saml.useRoutes', false) == true ){
             include __DIR__.'/../routes.php';
         }
-        $this->app->singleton('HungNguyenThanh\Saml\SamlAuth', function ($app) {
+        $this->app->singleton('Sotatek\Saml\SamlAuth', function ($app) {
             $config = config('saml');
             if (empty($config['sp']['entityId'])) {
                 $config['sp']['entityId'] = URL::route('saml_metadata');
@@ -45,7 +45,7 @@ class SamlServiceProvider extends ServiceProvider
                 $config['sp']['singleLogoutService']['url'] = URL::route('saml_sls');
             }
             $auth = new OneLogin_Saml2_Auth($config);
-            return new \HungNguyenThanh\Saml\SamlAuth($auth);
+            return new \Sotatek\Saml\SamlAuth($auth);
         });
     }
 }
