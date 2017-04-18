@@ -1,17 +1,15 @@
 <?php
-namespace Hungnguyen\Saml\Controllers;
-use Hungnguyen\Saml\Events\SamlLoginEvent;
-use Hungnguyen\Saml\Auth;
-use Hungnguyen\Saml\SamlAuth;
+namespace HungNguyenThanh\Saml\Controllers;
+use HungNguyenThanh\Saml\Events\SamlLoginEvent;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 class SamlController extends Controller
 {
     protected $samlAuth;
-    /**
-     * @param Saml2Auth $saml2Auth injected.
-     */
-    function __construct(SamlAuth $samlAuth)
+
+    function __construct(\HungNguyenThanh\Saml\SamlAuth $samlAuth)
     {
         $this->samlAuth = $samlAuth;
     }
@@ -28,15 +26,13 @@ class SamlController extends Controller
      * Process an incoming saml2 assertion request.
      * Fires 'Saml2LoginEvent' event if a valid user is Found
      */
-    public function acs()
+    public function acs(Request $request)
     {
         $errors = $this->samlAuth->acs();
         if (!empty($errors)) {
             logger()->error('Saml2 error_detail', ['error' => $this->samlAuth->getLastErrorReason()]);
-            session()->flash('saml2_error_detail', [$this->samlAuth->getLastErrorReason()]);
             logger()->error('Saml2 error', $errors);
-            session()->flash('saml2_error', $errors);
-            return redirect(config('saml2_settings.errorRoute'));
+            return redirect(config('saml.errorRoute'));
         }
         $user = $this->samlAuth->getSamlUser();
         event(new SamlLoginEvent($user));
@@ -44,7 +40,7 @@ class SamlController extends Controller
         if ($redirectUrl !== null) {
             return redirect($redirectUrl);
         } else {
-            return redirect(config('saml2_settings.loginRoute'));
+            return redirect(config('saml.loginRoute'));
         }
     }
     /**
@@ -54,11 +50,11 @@ class SamlController extends Controller
      */
     public function sls()
     {
-        $error = $this->samlAuth->sls(config('saml2_settings.retrieveParametersFromServer'));
+        $error = $this->samlAuth->sls(config('saml.retrieveParametersFromServer'));
         if (!empty($error)) {
             throw new \Exception("Could not log out");
         }
-        return redirect(config('saml2_settings.logoutRoute')); //may be set a configurable default
+        return redirect(config('saml.logoutRoute')); //may be set a configurable default
     }
     /**
      * This initiates a logout request across all the SSO infrastructure.
@@ -76,6 +72,6 @@ class SamlController extends Controller
      */
     public function login()
     {
-        $this->samlAuth->login(config('saml2_settings.loginRoute'));
+        $this->samlAuth->login(config('saml.loginRoute'));
     }
 }

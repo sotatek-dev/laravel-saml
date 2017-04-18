@@ -1,9 +1,9 @@
 <?php
-namespace Hungnguyen\Saml;
+namespace HungNguyenThanh\Saml;
 use OneLogin_Saml2_Auth;
 use OneLogin_Saml2_Error;
 use OneLogin_Saml2_Utils;
-use Hungnguyen\Saml\Events\SamlLogoutEvent;
+use HungNguyenThanh\Saml\Events\SamlLogoutEvent;
 use Log;
 use Psr\Log\InvalidArgumentException;
 class SamlAuth
@@ -25,10 +25,7 @@ class SamlAuth
         $auth = $this->auth;
         return $auth->isAuthenticated();
     }
-    /**
-     * The user info from the assertion
-     * @return Saml2User
-     */
+
     function getSamlUser()
     {
         return new SamlUser($this->auth);
